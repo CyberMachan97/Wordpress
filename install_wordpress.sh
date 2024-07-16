@@ -37,6 +37,11 @@ curl -LO https://wordpress.org/latest.tar.gz
 tar xzvf latest.tar.gz
 cp /tmp/wordpress/wp-config-sample.php /tmp/wordpress/wp-config.php
 
+# Update wp-config.php with database details
+sed -i "s/database_name_here/wordpress/" /tmp/wordpress/wp-config.php
+sed -i "s/username_here/wordpressuser/" /tmp/wordpress/wp-config.php
+sed -i "s/password_here/$wordpress_user_password/" /tmp/wordpress/wp-config.php
+
 # Generate unique keys and salts
 curl -s https://api.wordpress.org/secret-key/1.1/salt/ >> /tmp/wordpress/wp-config.php
 
@@ -64,3 +69,5 @@ systemctl restart apache2
 rm -rf /tmp/wordpress
 
 echo "WordPress installation is complete."
+
+
